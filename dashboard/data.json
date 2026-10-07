@@ -1,0 +1,2765 @@
+{
+ "meta": {
+  "route": "SER_dccb",
+  "route_is_loop": true,
+  "test_period": [
+   "2018-03-01 00:00:00",
+   "2018-03-31 23:00:00"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "samples": {
+   "train": 2713,
+   "val": 649,
+   "test": 721
+  },
+  "split": {
+   "val_start": "2018-02-01",
+   "test_start": "2018-03-01"
+  },
+  "n_forecast_stops": 19,
+  "n_route_stops": 22,
+  "od_trips": 840729,
+  "records": 384384,
+  "months": 6,
+  "days": [
+   "2018-03-01",
+   "2018-03-02",
+   "2018-03-03",
+   "2018-03-04",
+   "2018-03-05",
+   "2018-03-06",
+   "2018-03-07",
+   "2018-03-08",
+   "2018-03-09",
+   "2018-03-10",
+   "2018-03-11",
+   "2018-03-12",
+   "2018-03-13",
+   "2018-03-14",
+   "2018-03-15",
+   "2018-03-16",
+   "2018-03-17",
+   "2018-03-18",
+   "2018-03-19",
+   "2018-03-20",
+   "2018-03-21",
+   "2018-03-22",
+   "2018-03-23",
+   "2018-03-24",
+   "2018-03-25",
+   "2018-03-26",
+   "2018-03-27",
+   "2018-03-28",
+   "2018-03-29",
+   "2018-03-30",
+   "2018-03-31"
+  ],
+  "currency": "\u20b9",
+  "mape_label": "MAPE(y>=10)",
+  "defaults": {
+   "bus_capacity": 80,
+   "fixed_headway": 15
+  }
+ },
+ "models": [
+  {
+   "id": "ensemble_resid",
+   "name": "Ensemble + residual XGBoost",
+   "kind": "Production model",
+   "wmape": 18.8,
+   "wmape_text": "18.80",
+   "mae": 5.89,
+   "rmse": 11.07,
+   "mape": 21.72,
+   "seeds": 1
+  },
+  {
+   "id": "ensemble",
+   "name": "Ensemble (weighted)",
+   "kind": "Validation-weighted blend",
+   "wmape": 18.85,
+   "wmape_text": "18.85",
+   "mae": 5.91,
+   "rmse": 10.93,
+   "mape": 21.77,
+   "seeds": 1
+  },
+  {
+   "id": "xgb_direct",
+   "name": "XGBoost (direct)",
+   "kind": "Gradient boosting",
+   "wmape": 18.95,
+   "wmape_text": "18.95 \u00b1 0.11",
+   "mae": 5.94,
+   "rmse": 11.1,
+   "mape": 21.85,
+   "seeds": 3
+  },
+  {
+   "id": "agcrn",
+   "name": "AGCRN (learned graph)",
+   "kind": "Learned graph",
+   "wmape": 19.69,
+   "wmape_text": "19.69 \u00b1 0.08",
+   "mae": 6.17,
+   "rmse": 11.36,
+   "mape": 22.63,
+   "seeds": 3
+  },
+  {
+   "id": "stgnn_route",
+   "name": "STGNN (route graph)",
+   "kind": "Route graph",
+   "wmape": 19.7,
+   "wmape_text": "19.70 \u00b1 0.08",
+   "mae": 6.17,
+   "rmse": 11.41,
+   "mape": 22.61,
+   "seeds": 3
+  },
+  {
+   "id": "stgnn_od",
+   "name": "STGNN (OD-flow graph)",
+   "kind": "Passenger-flow graph",
+   "wmape": 19.7,
+   "wmape_text": "19.70 \u00b1 0.08",
+   "mae": 6.17,
+   "rmse": 11.4,
+   "mape": 22.62,
+   "seeds": 3
+  },
+  {
+   "id": "gru_nograph",
+   "name": "GRU (no graph)",
+   "kind": "No graph",
+   "wmape": 19.7,
+   "wmape_text": "19.70 \u00b1 0.10",
+   "mae": 6.17,
+   "rmse": 11.41,
+   "mape": 22.57,
+   "seeds": 3
+  },
+  {
+   "id": "how_mean",
+   "name": "Historical hour-of-week mean",
+   "kind": "Stop \u00d7 hour-of-week average",
+   "wmape": 19.97,
+   "wmape_text": "19.97",
+   "mae": 6.26,
+   "rmse": 11.58,
+   "mape": 22.72,
+   "seeds": 1
+  },
+  {
+   "id": "stgnn_v3",
+   "name": "STGNN-v3 (BiLSTM+attn)",
+   "kind": "BiLSTM + attention",
+   "wmape": 19.98,
+   "wmape_text": "19.98 \u00b1 0.02",
+   "mae": 6.26,
+   "rmse": 11.65,
+   "mape": 22.6,
+   "seeds": 3
+  },
+  {
+   "id": "naive_168h",
+   "name": "Seasonal naive (last week)",
+   "kind": "Seasonal naive",
+   "wmape": 24.11,
+   "wmape_text": "24.11",
+   "mae": 7.55,
+   "rmse": 13.84,
+   "mape": 29.53,
+   "seeds": 1
+  },
+  {
+   "id": "naive_24h",
+   "name": "Seasonal naive (yesterday)",
+   "kind": "Seasonal naive",
+   "wmape": 29.29,
+   "wmape_text": "29.29",
+   "mae": 9.18,
+   "rmse": 18.42,
+   "mape": 33.66,
+   "seeds": 1
+  }
+ ],
+ "weights": {
+  "stgnn_route": 0.469,
+  "xgb_direct": 0.531
+ },
+ "ablation": [
+  {
+   "variant": "all features",
+   "test_WMAPE": "19.70 \u00b1 0.10",
+   "wmape_mean": 19.70473908052234
+  },
+  {
+   "variant": "no weather",
+   "test_WMAPE": "19.76 \u00b1 0.12",
+   "wmape_mean": 19.76065277220954
+  },
+  {
+   "variant": "no holiday / day-off flags",
+   "test_WMAPE": "19.69 \u00b1 0.08",
+   "wmape_mean": 19.692851066208846
+  },
+  {
+   "variant": "no hour-of-week profile",
+   "test_WMAPE": "21.36 \u00b1 0.32",
+   "wmape_mean": 21.358729055888613
+  }
+ ],
+ "errors": {
+  "by_stop": [
+   {
+    "stop": "EV_2",
+    "wmape": 18.84
+   },
+   {
+    "stop": "MH_2",
+    "wmape": 12.84
+   },
+   {
+    "stop": "ELY_1",
+    "wmape": 16.84
+   },
+   {
+    "stop": "PL_2",
+    "wmape": 28.8
+   },
+   {
+    "stop": "QN_1",
+    "wmape": 29.52
+   },
+   {
+    "stop": "AXF_1",
+    "wmape": 46.2
+   },
+   {
+    "stop": "AVX_1",
+    "wmape": 59.95
+   },
+   {
+    "stop": "BWK_1",
+    "wmape": 31.98
+   },
+   {
+    "stop": "BXK_1",
+    "wmape": 52.36
+   },
+   {
+    "stop": "EVJ_1",
+    "wmape": 37.13
+   },
+   {
+    "stop": "JB_1",
+    "wmape": 18.92
+   },
+   {
+    "stop": "ATK_1",
+    "wmape": 21.33
+   },
+   {
+    "stop": "BYQ_1",
+    "wmape": 16.67
+   },
+   {
+    "stop": "SL_1",
+    "wmape": 20.33
+   },
+   {
+    "stop": "DJJ_1",
+    "wmape": 26.51
+   },
+   {
+    "stop": "GS_2",
+    "wmape": 17.65
+   },
+   {
+    "stop": "CQG_1",
+    "wmape": 22.95
+   },
+   {
+    "stop": "BOR_1",
+    "wmape": 17.94
+   },
+   {
+    "stop": "HT_2",
+    "wmape": 14.57
+   }
+  ],
+  "by_hour": [
+   {
+    "hour": 0,
+    "wmape": 24.85
+   },
+   {
+    "hour": 1,
+    "wmape": 105.36
+   },
+   {
+    "hour": 2,
+    "wmape": 290.23
+   },
+   {
+    "hour": 3,
+    "wmape": null
+   },
+   {
+    "hour": 4,
+    "wmape": null
+   },
+   {
+    "hour": 5,
+    "wmape": 19.8
+   },
+   {
+    "hour": 6,
+    "wmape": 21.7
+   },
+   {
+    "hour": 7,
+    "wmape": 17.72
+   },
+   {
+    "hour": 8,
+    "wmape": 14.41
+   },
+   {
+    "hour": 9,
+    "wmape": 15.59
+   },
+   {
+    "hour": 10,
+    "wmape": 17.76
+   },
+   {
+    "hour": 11,
+    "wmape": 17.57
+   },
+   {
+    "hour": 12,
+    "wmape": 18.44
+   },
+   {
+    "hour": 13,
+    "wmape": 18.89
+   },
+   {
+    "hour": 14,
+    "wmape": 21.2
+   },
+   {
+    "hour": 15,
+    "wmape": 21.83
+   },
+   {
+    "hour": 16,
+    "wmape": 19.31
+   },
+   {
+    "hour": 17,
+    "wmape": 19.96
+   },
+   {
+    "hour": 18,
+    "wmape": 18.3
+   },
+   {
+    "hour": 19,
+    "wmape": 19.23
+   },
+   {
+    "hour": 20,
+    "wmape": 19.53
+   },
+   {
+    "hour": 21,
+    "wmape": 19.8
+   },
+   {
+    "hour": 22,
+    "wmape": 17.45
+   },
+   {
+    "hour": 23,
+    "wmape": 18.78
+   }
+  ]
+ },
+ "schedule": {
+  "load_factor": 0.85,
+  "assumptions": {
+   "bus_capacity": 80,
+   "fixed_headway": 15,
+   "round_trip_min": 60,
+   "cost_per_vehicle_hour": 50
+  },
+  "plans": {
+   "fixed": {
+    "plan": "fixed",
+    "vehicle_hours_per_day": 96.0,
+    "cost_per_day": 4800.0,
+    "overcrowded_hours_total": 251,
+    "days_with_overcrowding": 31,
+    "avg_wait_min": 9.285,
+    "cost_vs_fixed_pct": 0.0
+   },
+   "forecast": {
+    "plan": "forecast",
+    "vehicle_hours_per_day": 108.29,
+    "cost_per_day": 5414.516,
+    "overcrowded_hours_total": 8,
+    "days_with_overcrowding": 4,
+    "avg_wait_min": 6.01,
+    "cost_vs_fixed_pct": 12.802
+   },
+   "oracle": {
+    "plan": "oracle",
+    "vehicle_hours_per_day": 95.903,
+    "cost_per_day": 4795.161,
+    "overcrowded_hours_total": 0,
+    "days_with_overcrowding": 0,
+    "avg_wait_min": 6.838,
+    "cost_vs_fixed_pct": -0.101
+   }
+  },
+  "unbuffered": {
+   "plan": "forecast",
+   "vehicle_hours_per_day": 94.806,
+   "cost_per_day": 4740.323,
+   "overcrowded_hours_total": 110,
+   "days_with_overcrowding": 28,
+   "avg_wait_min": 7.056,
+   "cost_vs_fixed_pct": -1.243
+  },
+  "validation_curve": [
+   {
+    "load_factor": 1.0,
+    "vehicle_hours_per_day": 94.536,
+    "cost_per_day": 4726.786,
+    "overcrowded_hours_total": 119.0,
+    "days_with_overcrowding": 27.0,
+    "avg_wait_min": 7.079,
+    "cost_vs_fixed_pct": -1.525
+   },
+   {
+    "load_factor": 0.95,
+    "vehicle_hours_per_day": 99.893,
+    "cost_per_day": 4994.643,
+    "overcrowded_hours_total": 56.0,
+    "days_with_overcrowding": 25.0,
+    "avg_wait_min": 6.562,
+    "cost_vs_fixed_pct": 4.055
+   },
+   {
+    "load_factor": 0.9,
+    "vehicle_hours_per_day": 103.929,
+    "cost_per_day": 5196.429,
+    "overcrowded_hours_total": 23.0,
+    "days_with_overcrowding": 14.0,
+    "avg_wait_min": 6.247,
+    "cost_vs_fixed_pct": 8.259
+   },
+   {
+    "load_factor": 0.85,
+    "vehicle_hours_per_day": 107.929,
+    "cost_per_day": 5396.429,
+    "overcrowded_hours_total": 8.0,
+    "days_with_overcrowding": 7.0,
+    "avg_wait_min": 6.008,
+    "cost_vs_fixed_pct": 12.426
+   },
+   {
+    "load_factor": 0.8,
+    "vehicle_hours_per_day": 113.5,
+    "cost_per_day": 5675.0,
+    "overcrowded_hours_total": 2.0,
+    "days_with_overcrowding": 2.0,
+    "avg_wait_min": 5.699,
+    "cost_vs_fixed_pct": 18.229
+   },
+   {
+    "load_factor": 0.75,
+    "vehicle_hours_per_day": 121.357,
+    "cost_per_day": 6067.857,
+    "overcrowded_hours_total": 0.0,
+    "days_with_overcrowding": 0.0,
+    "avg_wait_min": 5.269,
+    "cost_vs_fixed_pct": 26.414
+   },
+   {
+    "load_factor": 0.7,
+    "vehicle_hours_per_day": 127.714,
+    "cost_per_day": 6385.714,
+    "overcrowded_hours_total": 0.0,
+    "days_with_overcrowding": 0.0,
+    "avg_wait_min": 4.971,
+    "cost_vs_fixed_pct": 33.036
+   }
+  ],
+  "days": [
+   {
+    "day": "2018-03-01",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 10.81
+    },
+    "forecast": {
+     "vehicle_hours": 110.0,
+     "overcrowded_hours": 5,
+     "avg_wait_min": 6.09
+    },
+    "oracle": {
+     "vehicle_hours": 112.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.86
+    }
+   },
+   {
+    "day": "2018-03-02",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.95
+    },
+    "forecast": {
+     "vehicle_hours": 114.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.8
+    },
+    "oracle": {
+     "vehicle_hours": 99.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.62
+    }
+   },
+   {
+    "day": "2018-03-03",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 11,
+     "avg_wait_min": 10.05
+    },
+    "forecast": {
+     "vehicle_hours": 120.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.29
+    },
+    "oracle": {
+     "vehicle_hours": 105.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.25
+    }
+   },
+   {
+    "day": "2018-03-04",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 10,
+     "avg_wait_min": 8.23
+    },
+    "forecast": {
+     "vehicle_hours": 102.0,
+     "overcrowded_hours": 1,
+     "avg_wait_min": 6.36
+    },
+    "oracle": {
+     "vehicle_hours": 92.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.97
+    }
+   },
+   {
+    "day": "2018-03-05",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 8.39
+    },
+    "forecast": {
+     "vehicle_hours": 102.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.08
+    },
+    "oracle": {
+     "vehicle_hours": 90.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.98
+    }
+   },
+   {
+    "day": "2018-03-06",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 9.86
+    },
+    "forecast": {
+     "vehicle_hours": 106.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.21
+    },
+    "oracle": {
+     "vehicle_hours": 99.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.67
+    }
+   },
+   {
+    "day": "2018-03-07",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 10.01
+    },
+    "forecast": {
+     "vehicle_hours": 108.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.06
+    },
+    "oracle": {
+     "vehicle_hours": 101.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.51
+    }
+   },
+   {
+    "day": "2018-03-08",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.94
+    },
+    "forecast": {
+     "vehicle_hours": 110.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.92
+    },
+    "oracle": {
+     "vehicle_hours": 101.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.43
+    }
+   },
+   {
+    "day": "2018-03-09",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.71
+    },
+    "forecast": {
+     "vehicle_hours": 112.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.9
+    },
+    "oracle": {
+     "vehicle_hours": 97.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.78
+    }
+   },
+   {
+    "day": "2018-03-10",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 12,
+     "avg_wait_min": 9.95
+    },
+    "forecast": {
+     "vehicle_hours": 120.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.33
+    },
+    "oracle": {
+     "vehicle_hours": 105.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.19
+    }
+   },
+   {
+    "day": "2018-03-11",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 5,
+     "avg_wait_min": 7.92
+    },
+    "forecast": {
+     "vehicle_hours": 102.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.34
+    },
+    "oracle": {
+     "vehicle_hours": 88.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.31
+    }
+   },
+   {
+    "day": "2018-03-12",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 5,
+     "avg_wait_min": 8.05
+    },
+    "forecast": {
+     "vehicle_hours": 100.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.26
+    },
+    "oracle": {
+     "vehicle_hours": 84.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.6
+    }
+   },
+   {
+    "day": "2018-03-13",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 9.39
+    },
+    "forecast": {
+     "vehicle_hours": 106.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.28
+    },
+    "oracle": {
+     "vehicle_hours": 93.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.17
+    }
+   },
+   {
+    "day": "2018-03-14",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 9.24
+    },
+    "forecast": {
+     "vehicle_hours": 107.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.22
+    },
+    "oracle": {
+     "vehicle_hours": 93.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.15
+    }
+   },
+   {
+    "day": "2018-03-15",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 9.27
+    },
+    "forecast": {
+     "vehicle_hours": 108.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.16
+    },
+    "oracle": {
+     "vehicle_hours": 95.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.05
+    }
+   },
+   {
+    "day": "2018-03-16",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 9.07
+    },
+    "forecast": {
+     "vehicle_hours": 108.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.2
+    },
+    "oracle": {
+     "vehicle_hours": 92.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.22
+    }
+   },
+   {
+    "day": "2018-03-17",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 10,
+     "avg_wait_min": 9.08
+    },
+    "forecast": {
+     "vehicle_hours": 118.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.48
+    },
+    "oracle": {
+     "vehicle_hours": 100.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.51
+    }
+   },
+   {
+    "day": "2018-03-18",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 4,
+     "avg_wait_min": 7.69
+    },
+    "forecast": {
+     "vehicle_hours": 102.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.38
+    },
+    "oracle": {
+     "vehicle_hours": 87.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.59
+    }
+   },
+   {
+    "day": "2018-03-19",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 8.29
+    },
+    "forecast": {
+     "vehicle_hours": 99.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.29
+    },
+    "oracle": {
+     "vehicle_hours": 86.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.35
+    }
+   },
+   {
+    "day": "2018-03-20",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.68
+    },
+    "forecast": {
+     "vehicle_hours": 106.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.15
+    },
+    "oracle": {
+     "vehicle_hours": 98.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.7
+    }
+   },
+   {
+    "day": "2018-03-21",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 9.99
+    },
+    "forecast": {
+     "vehicle_hours": 106.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.12
+    },
+    "oracle": {
+     "vehicle_hours": 97.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.8
+    }
+   },
+   {
+    "day": "2018-03-22",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 9.91
+    },
+    "forecast": {
+     "vehicle_hours": 109.0,
+     "overcrowded_hours": 1,
+     "avg_wait_min": 5.97
+    },
+    "oracle": {
+     "vehicle_hours": 101.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.46
+    }
+   },
+   {
+    "day": "2018-03-23",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 6,
+     "avg_wait_min": 9.31
+    },
+    "forecast": {
+     "vehicle_hours": 108.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.0
+    },
+    "oracle": {
+     "vehicle_hours": 92.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.15
+    }
+   },
+   {
+    "day": "2018-03-24",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 12,
+     "avg_wait_min": 9.78
+    },
+    "forecast": {
+     "vehicle_hours": 116.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.5
+    },
+    "oracle": {
+     "vehicle_hours": 103.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.24
+    }
+   },
+   {
+    "day": "2018-03-25",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 8.02
+    },
+    "forecast": {
+     "vehicle_hours": 101.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.45
+    },
+    "oracle": {
+     "vehicle_hours": 90.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.19
+    }
+   },
+   {
+    "day": "2018-03-26",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 6,
+     "avg_wait_min": 7.86
+    },
+    "forecast": {
+     "vehicle_hours": 101.0,
+     "overcrowded_hours": 1,
+     "avg_wait_min": 6.25
+    },
+    "oracle": {
+     "vehicle_hours": 85.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.52
+    }
+   },
+   {
+    "day": "2018-03-27",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.81
+    },
+    "forecast": {
+     "vehicle_hours": 107.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.09
+    },
+    "oracle": {
+     "vehicle_hours": 99.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.66
+    }
+   },
+   {
+    "day": "2018-03-28",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.83
+    },
+    "forecast": {
+     "vehicle_hours": 110.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.95
+    },
+    "oracle": {
+     "vehicle_hours": 98.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.68
+    }
+   },
+   {
+    "day": "2018-03-29",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 8,
+     "avg_wait_min": 9.81
+    },
+    "forecast": {
+     "vehicle_hours": 110.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.93
+    },
+    "oracle": {
+     "vehicle_hours": 100.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.59
+    }
+   },
+   {
+    "day": "2018-03-30",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 7,
+     "avg_wait_min": 9.33
+    },
+    "forecast": {
+     "vehicle_hours": 110.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.95
+    },
+    "oracle": {
+     "vehicle_hours": 92.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 7.25
+    }
+   },
+   {
+    "day": "2018-03-31",
+    "fixed": {
+     "vehicle_hours": 96.0,
+     "overcrowded_hours": 9,
+     "avg_wait_min": 9.62
+    },
+    "forecast": {
+     "vehicle_hours": 119.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 5.32
+    },
+    "oracle": {
+     "vehicle_hours": 99.0,
+     "overcrowded_hours": 0,
+     "avg_wait_min": 6.53
+    }
+   }
+  ]
+ },
+ "simulation": {
+  "day": "2018-03-01",
+  "day_index": 0,
+  "n_days": 31,
+  "forecast": {
+   "hours": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ],
+   "actual": [
+    137.0,
+    8.0,
+    0.0,
+    0.0,
+    0.0,
+    344.0,
+    920.0,
+    1488.0,
+    1068.0,
+    747.0,
+    722.0,
+    755.0,
+    688.0,
+    958.0,
+    776.0,
+    652.0,
+    770.0,
+    1060.0,
+    1504.0,
+    1566.0,
+    815.0,
+    959.0,
+    440.0,
+    424.0
+   ],
+   "predicted": [
+    125.0999984741211,
+    2.0,
+    0.0,
+    0.10000000149011612,
+    0.10000000149011612,
+    334.79998779296875,
+    922.4000244140625,
+    1409.5999755859375,
+    1009.5,
+    757.2999877929688,
+    672.4000244140625,
+    630.9000244140625,
+    626.4000244140625,
+    730.5,
+    730.2999877929688,
+    682.4000244140625,
+    805.0999755859375,
+    960.0,
+    1168.699951171875,
+    1029.0,
+    757.5999755859375,
+    603.7999877929688,
+    488.20001220703125,
+    307.0
+   ],
+   "day_wmape": 22.01
+  },
+  "optimization": {
+   "assumptions": {
+    "bus_capacity": 80,
+    "fixed_headway": 15,
+    "round_trip_min": 60,
+    "cost_per_vehicle_hour": 50,
+    "min_headway": 5,
+    "max_headway": 30,
+    "planning_load_factor": 0.85
+   },
+   "fixed": {
+    "departures": [
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ],
+    "headway": [
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0,
+     15.0
+    ],
+    "vehicles": [
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0,
+     4.0
+    ],
+    "vehicle_hours": 96.0,
+    "departures_total": 96.0,
+    "cost": 4800.0,
+    "avg_wait_min": 9.812931442168248,
+    "overcrowded_hours": 9,
+    "max_utilisation": 1.7578395676819274,
+    "realized_overcrowded_hours": 9,
+    "realized_avg_wait_min": 10.813195458241445,
+    "realized_max_utilisation": 2.539855587121212
+   },
+   "optimized": {
+    "departures": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     4.0,
+     7.0,
+     9.0,
+     6.0,
+     4.0,
+     4.0,
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     4.0,
+     5.0,
+     6.0,
+     8.0,
+     9.0,
+     6.0,
+     5.0,
+     5.0,
+     4.0
+    ],
+    "headway": [
+     30.0,
+     30.0,
+     30.0,
+     30.0,
+     30.0,
+     15.0,
+     8.571428571428571,
+     6.666666666666667,
+     10.0,
+     15.0,
+     15.0,
+     20.0,
+     20.0,
+     15.0,
+     15.0,
+     15.0,
+     12.0,
+     10.0,
+     7.5,
+     6.666666666666667,
+     10.0,
+     12.0,
+     12.0,
+     15.0
+    ],
+    "vehicles": [
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     2.0,
+     4.0,
+     7.0,
+     9.0,
+     6.0,
+     4.0,
+     4.0,
+     3.0,
+     3.0,
+     4.0,
+     4.0,
+     4.0,
+     5.0,
+     6.0,
+     8.0,
+     9.0,
+     6.0,
+     5.0,
+     5.0,
+     4.0
+    ],
+    "vehicle_hours": 110.0,
+    "departures_total": 110.0,
+    "cost": 5500.0,
+    "avg_wait_min": 5.936792067579984,
+    "overcrowded_hours": 0,
+    "max_utilisation": 0.8496967745106041,
+    "capacity_limited_hours": 0,
+    "realized_overcrowded_hours": 5,
+    "realized_avg_wait_min": 6.086175410025789,
+    "realized_max_utilisation": 1.1430933285686957
+   },
+   "savings": {
+    "cost_pct": -14.583333333333334,
+    "vehicle_hours": -14.0,
+    "wait_change_min": -3.8761393745882637,
+    "overcrowding_reduction": 9
+   },
+   "peak_load": [
+    103.2,
+    0.9,
+    0.0,
+    0.0,
+    0.0,
+    271.9,
+    437.2,
+    562.2,
+    393.4,
+    260.8,
+    234.0,
+    195.7,
+    187.0,
+    242.3,
+    232.3,
+    249.5,
+    321.9,
+    373.8,
+    533.9,
+    562.5,
+    395.8,
+    338.3,
+    318.8,
+    227.2
+   ],
+   "peak_segment": [
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "EV_2\u2192MH_2",
+    "MH_2\u2192ELY_1",
+    "AVX_1\u2192BWK_1",
+    "HT_2\u2192F_5",
+    "HT_2\u2192F_5",
+    "HT_2\u2192F_5",
+    "HT_2\u2192F_5",
+    "CQG_1\u2192BOR_1",
+    "CQG_1\u2192BOR_1",
+    "CQG_1\u2192BOR_1",
+    "BOR_1\u2192HT_2",
+    "PL_2\u2192QN_1",
+    "PL_2\u2192QN_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1"
+   ],
+   "actual_peak_load": [
+    108.9,
+    4.2,
+    0.0,
+    0.0,
+    0.0,
+    275.8,
+    430.5,
+    597.4,
+    398.6,
+    270.5,
+    246.5,
+    231.1,
+    212.7,
+    312.0,
+    266.1,
+    252.2,
+    289.0,
+    489.9,
+    731.6,
+    812.8,
+    408.3,
+    415.6,
+    282.5,
+    331.7
+   ],
+   "actual_peak_segment": [
+    "MH_2\u2192ELY_1",
+    "PL_2\u2192QN_1",
+    "BUSPARK\u2192EV_2",
+    "BUSPARK\u2192EV_2",
+    "BUSPARK\u2192EV_2",
+    "HT_2\u2192F_5",
+    "HT_2\u2192F_5",
+    "CQG_1\u2192BOR_1",
+    "HT_2\u2192F_5",
+    "CQG_1\u2192BOR_1",
+    "CQG_1\u2192BOR_1",
+    "CQG_1\u2192BOR_1",
+    "CQG_1\u2192BOR_1",
+    "PL_2\u2192QN_1",
+    "PL_2\u2192QN_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1",
+    "ELY_1\u2192PL_2",
+    "MH_2\u2192ELY_1",
+    "MH_2\u2192ELY_1"
+   ]
+  },
+  "heatmap": {
+   "segments": [
+    "BUSPARK\u2192EV_2",
+    "EV_2\u2192MH_2",
+    "MH_2\u2192ELY_1",
+    "ELY_1\u2192PL_2",
+    "PL_2\u2192QN_1",
+    "QN_1\u2192AXF_1",
+    "AXF_1\u2192AVX_1",
+    "AVX_1\u2192BWK_1",
+    "BWK_1\u2192BXK_1",
+    "BXK_1\u2192EVJ_1",
+    "EVJ_1\u2192JB_1",
+    "JB_1\u2192ATK_1",
+    "ATK_1\u2192BYQ_1",
+    "BYQ_1\u2192SL_1",
+    "SL_1\u2192DJJ_1",
+    "DJJ_1\u2192GS_2",
+    "GS_2\u2192CQG_1",
+    "CQG_1\u2192BOR_1",
+    "BOR_1\u2192HT_2",
+    "HT_2\u2192F_5",
+    "F_5\u2192I_4",
+    "I_4\u2192BUSPARK"
+   ],
+   "hours": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ],
+   "data": [
+    [
+     0.5,
+     0.1,
+     0.0,
+     0.0,
+     0.0,
+     55.4,
+     86.3,
+     94.7,
+     68.7,
+     60.0,
+     66.3,
+     68.1,
+     69.5,
+     81.8,
+     77.3,
+     63.8,
+     61.4,
+     62.7,
+     53.2,
+     38.1,
+     31.5,
+     23.5,
+     15.2,
+     5.4
+    ],
+    [
+     39.3,
+     0.1,
+     0.0,
+     0.0,
+     0.0,
+     0.8,
+     32.2,
+     40.2,
+     54.4,
+     50.1,
+     58.6,
+     70.1,
+     76.0,
+     87.1,
+     106.8,
+     126.5,
+     152.1,
+     163.3,
+     206.7,
+     222.3,
+     141.2,
+     101.3,
+     65.1,
+     51.6
+    ],
+    [
+     103.2,
+     0.9,
+     0.0,
+     0.0,
+     0.0,
+     17.0,
+     123.5,
+     207.4,
+     207.9,
+     138.2,
+     126.9,
+     140.3,
+     145.2,
+     186.2,
+     217.7,
+     249.5,
+     321.9,
+     373.8,
+     533.9,
+     562.5,
+     395.8,
+     338.3,
+     318.8,
+     227.2
+    ],
+    [
+     82.9,
+     0.8,
+     0.0,
+     0.0,
+     0.0,
+     10.6,
+     129.3,
+     229.1,
+     161.8,
+     157.7,
+     168.4,
+     178.6,
+     176.8,
+     234.2,
+     224.5,
+     229.6,
+     261.0,
+     302.0,
+     390.3,
+     346.5,
+     276.5,
+     248.1,
+     213.6,
+     156.3
+    ],
+    [
+     72.1,
+     0.8,
+     0.0,
+     0.0,
+     0.0,
+     12.2,
+     142.8,
+     242.1,
+     155.0,
+     156.2,
+     169.5,
+     177.3,
+     172.2,
+     242.3,
+     232.3,
+     229.4,
+     250.1,
+     286.6,
+     357.7,
+     293.4,
+     239.8,
+     197.5,
+     160.1,
+     118.3
+    ],
+    [
+     67.1,
+     0.8,
+     0.0,
+     0.0,
+     0.0,
+     11.7,
+     138.6,
+     241.5,
+     147.1,
+     137.5,
+     148.6,
+     156.1,
+     160.4,
+     223.3,
+     211.5,
+     212.0,
+     231.8,
+     267.0,
+     327.6,
+     271.3,
+     225.1,
+     187.8,
+     145.8,
+     110.3
+    ],
+    [
+     48.1,
+     0.6,
+     0.0,
+     0.0,
+     0.0,
+     10.0,
+     131.6,
+     238.5,
+     129.5,
+     113.4,
+     120.0,
+     127.5,
+     135.7,
+     185.6,
+     169.6,
+     174.0,
+     191.8,
+     229.4,
+     265.8,
+     216.3,
+     178.4,
+     150.5,
+     106.1,
+     77.0
+    ],
+    [
+     34.6,
+     0.5,
+     0.0,
+     0.0,
+     0.0,
+     8.7,
+     107.8,
+     201.1,
+     109.4,
+     99.4,
+     99.5,
+     107.9,
+     114.8,
+     157.5,
+     152.4,
+     148.7,
+     168.1,
+     200.4,
+     227.7,
+     181.4,
+     150.1,
+     125.4,
+     86.7,
+     58.9
+    ],
+    [
+     27.3,
+     0.4,
+     0.0,
+     0.0,
+     0.0,
+     7.4,
+     86.4,
+     170.0,
+     74.7,
+     72.1,
+     72.8,
+     81.1,
+     88.1,
+     113.8,
+     139.7,
+     117.6,
+     132.3,
+     161.8,
+     179.7,
+     146.1,
+     116.3,
+     98.1,
+     71.5,
+     45.7
+    ],
+    [
+     22.2,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     8.6,
+     75.0,
+     153.7,
+     67.3,
+     65.4,
+     66.2,
+     72.8,
+     77.5,
+     110.9,
+     139.1,
+     108.2,
+     128.4,
+     159.1,
+     172.2,
+     130.3,
+     104.0,
+     85.1,
+     60.0,
+     38.4
+    ],
+    [
+     17.2,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     17.1,
+     70.0,
+     160.9,
+     73.5,
+     66.6,
+     62.2,
+     72.2,
+     75.2,
+     111.3,
+     132.2,
+     106.1,
+     128.3,
+     163.0,
+     161.8,
+     121.8,
+     96.3,
+     79.3,
+     53.8,
+     33.5
+    ],
+    [
+     9.5,
+     0.2,
+     0.0,
+     0.0,
+     0.0,
+     44.3,
+     115.8,
+     157.1,
+     99.9,
+     81.8,
+     71.6,
+     77.4,
+     76.2,
+     106.9,
+     102.9,
+     89.3,
+     115.1,
+     141.0,
+     132.8,
+     99.7,
+     73.2,
+     56.5,
+     32.9,
+     17.9
+    ],
+    [
+     5.7,
+     0.2,
+     0.0,
+     0.0,
+     0.0,
+     79.1,
+     160.0,
+     190.0,
+     130.0,
+     100.0,
+     77.8,
+     78.1,
+     78.4,
+     101.9,
+     90.2,
+     81.6,
+     104.1,
+     131.6,
+     124.2,
+     93.1,
+     61.9,
+     48.0,
+     29.4,
+     12.5
+    ],
+    [
+     6.7,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     124.6,
+     266.1,
+     297.5,
+     183.4,
+     135.2,
+     112.6,
+     114.4,
+     112.5,
+     131.6,
+     113.2,
+     102.0,
+     123.9,
+     155.3,
+     151.4,
+     117.6,
+     78.2,
+     52.1,
+     37.1,
+     17.0
+    ],
+    [
+     7.9,
+     0.4,
+     0.0,
+     0.0,
+     0.0,
+     163.2,
+     292.2,
+     324.1,
+     214.1,
+     170.5,
+     152.1,
+     144.7,
+     140.7,
+     156.9,
+     143.7,
+     131.6,
+     154.0,
+     186.3,
+     185.3,
+     147.2,
+     104.0,
+     68.1,
+     46.5,
+     21.4
+    ],
+    [
+     7.9,
+     0.4,
+     0.0,
+     0.0,
+     0.0,
+     176.4,
+     323.2,
+     378.5,
+     247.3,
+     192.9,
+     177.0,
+     157.3,
+     155.3,
+     173.4,
+     171.4,
+     142.5,
+     168.7,
+     199.9,
+     201.0,
+     157.6,
+     109.7,
+     71.4,
+     48.1,
+     23.4
+    ],
+    [
+     7.2,
+     0.5,
+     0.0,
+     0.0,
+     0.0,
+     216.5,
+     406.2,
+     506.2,
+     325.7,
+     240.1,
+     218.4,
+     190.9,
+     180.8,
+     199.6,
+     189.3,
+     155.6,
+     178.2,
+     223.9,
+     224.0,
+     169.2,
+     123.8,
+     79.2,
+     54.9,
+     24.3
+    ],
+    [
+     6.0,
+     0.5,
+     0.0,
+     0.0,
+     0.0,
+     230.0,
+     425.1,
+     560.7,
+     356.6,
+     260.8,
+     234.0,
+     195.7,
+     183.9,
+     199.4,
+     180.7,
+     150.8,
+     173.3,
+     214.0,
+     218.0,
+     162.5,
+     118.7,
+     82.1,
+     54.7,
+     22.1
+    ],
+    [
+     4.5,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     243.6,
+     394.1,
+     528.5,
+     355.1,
+     258.6,
+     225.9,
+     190.0,
+     187.0,
+     191.4,
+     171.0,
+     143.7,
+     165.7,
+     191.1,
+     203.2,
+     146.9,
+     115.4,
+     82.4,
+     50.6,
+     19.4
+    ],
+    [
+     3.2,
+     0.3,
+     0.0,
+     0.0,
+     0.0,
+     271.9,
+     437.2,
+     562.2,
+     393.4,
+     259.6,
+     205.8,
+     180.8,
+     175.9,
+     192.7,
+     176.4,
+     146.6,
+     150.2,
+     169.6,
+     177.9,
+     134.0,
+     107.0,
+     90.0,
+     55.6,
+     21.9
+    ],
+    [
+     2.2,
+     0.2,
+     0.0,
+     0.0,
+     0.0,
+     250.6,
+     402.7,
+     519.4,
+     362.3,
+     237.0,
+     184.8,
+     166.6,
+     161.3,
+     173.9,
+     157.3,
+     132.4,
+     135.3,
+     151.4,
+     157.6,
+     118.5,
+     94.0,
+     79.6,
+     48.5,
+     19.5
+    ],
+    [
+     0.5,
+     0.1,
+     0.0,
+     0.0,
+     0.0,
+     55.4,
+     86.3,
+     94.7,
+     68.7,
+     60.0,
+     66.3,
+     68.1,
+     69.4,
+     81.7,
+     77.2,
+     63.5,
+     61.4,
+     62.6,
+     53.2,
+     38.1,
+     31.5,
+     23.5,
+     15.2,
+     5.4
+    ]
+   ],
+   "actual": [
+    [
+     0.4,
+     0.6,
+     0.0,
+     0.0,
+     0.0,
+     57.0,
+     86.3,
+     93.9,
+     73.4,
+     63.2,
+     74.4,
+     80.1,
+     77.7,
+     120.2,
+     74.6,
+     56.9,
+     65.8,
+     66.4,
+     71.3,
+     68.5,
+     31.3,
+     54.7,
+     14.4,
+     4.0
+    ],
+    [
+     32.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     4.1,
+     39.0,
+     56.0,
+     75.0,
+     64.0,
+     63.1,
+     97.0,
+     78.1,
+     89.1,
+     109.1,
+     121.3,
+     131.0,
+     183.1,
+     225.1,
+     294.0,
+     111.0,
+     112.0,
+     56.0,
+     90.0
+    ],
+    [
+     108.9,
+     4.0,
+     0.0,
+     0.0,
+     0.0,
+     14.9,
+     138.2,
+     213.6,
+     260.7,
+     136.1,
+     150.2,
+     182.1,
+     176.6,
+     192.8,
+     216.5,
+     252.2,
+     289.0,
+     489.9,
+     731.6,
+     812.8,
+     408.3,
+     375.5,
+     282.5,
+     331.7
+    ],
+    [
+     85.5,
+     2.7,
+     0.0,
+     0.0,
+     0.0,
+     12.8,
+     129.6,
+     251.9,
+     173.0,
+     126.6,
+     168.6,
+     203.7,
+     186.5,
+     291.8,
+     261.5,
+     239.6,
+     224.2,
+     334.6,
+     441.0,
+     543.8,
+     317.1,
+     415.6,
+     186.8,
+     230.1
+    ],
+    [
+     73.4,
+     4.2,
+     0.0,
+     0.0,
+     0.0,
+     14.3,
+     145.6,
+     267.7,
+     163.2,
+     143.3,
+     165.9,
+     204.7,
+     170.0,
+     312.0,
+     266.1,
+     242.5,
+     220.7,
+     301.0,
+     373.2,
+     454.0,
+     292.3,
+     363.4,
+     136.2,
+     167.9
+    ],
+    [
+     67.9,
+     3.9,
+     0.0,
+     0.0,
+     0.0,
+     12.8,
+     143.0,
+     272.2,
+     149.7,
+     129.5,
+     153.8,
+     181.4,
+     150.8,
+     290.7,
+     239.3,
+     215.6,
+     208.3,
+     271.2,
+     342.3,
+     402.2,
+     265.1,
+     336.3,
+     124.0,
+     161.8
+    ],
+    [
+     50.0,
+     2.6,
+     0.0,
+     0.0,
+     0.0,
+     11.4,
+     137.0,
+     275.2,
+     132.0,
+     105.2,
+     129.1,
+     147.9,
+     123.1,
+     242.2,
+     190.5,
+     177.8,
+     170.6,
+     228.7,
+     275.1,
+     314.4,
+     205.3,
+     262.4,
+     89.1,
+     113.6
+    ],
+    [
+     36.3,
+     2.1,
+     0.0,
+     0.0,
+     0.0,
+     9.0,
+     116.1,
+     240.1,
+     110.1,
+     93.0,
+     109.3,
+     126.3,
+     105.0,
+     204.8,
+     169.3,
+     150.7,
+     149.8,
+     203.2,
+     232.6,
+     265.3,
+     169.6,
+     214.9,
+     72.4,
+     87.4
+    ],
+    [
+     28.3,
+     1.8,
+     0.0,
+     0.0,
+     0.0,
+     5.8,
+     94.6,
+     206.7,
+     80.0,
+     69.9,
+     71.1,
+     101.5,
+     81.5,
+     142.9,
+     165.2,
+     110.0,
+     119.2,
+     156.6,
+     187.1,
+     203.1,
+     126.4,
+     161.4,
+     61.3,
+     68.9
+    ],
+    [
+     23.2,
+     1.2,
+     0.0,
+     0.0,
+     0.0,
+     8.5,
+     85.3,
+     196.5,
+     78.5,
+     62.8,
+     66.1,
+     92.4,
+     75.5,
+     150.8,
+     158.3,
+     101.7,
+     111.2,
+     150.8,
+     192.3,
+     179.9,
+     109.9,
+     138.6,
+     52.4,
+     60.2
+    ],
+    [
+     17.7,
+     2.9,
+     0.0,
+     0.0,
+     0.0,
+     19.5,
+     81.4,
+     217.9,
+     83.2,
+     66.7,
+     72.3,
+     90.1,
+     69.3,
+     158.4,
+     162.3,
+     95.1,
+     115.3,
+     147.2,
+     188.0,
+     166.4,
+     103.0,
+     120.4,
+     49.3,
+     53.3
+    ],
+    [
+     10.3,
+     2.6,
+     0.0,
+     0.0,
+     0.0,
+     44.5,
+     123.2,
+     189.6,
+     108.4,
+     74.5,
+     88.3,
+     85.8,
+     78.9,
+     147.8,
+     121.6,
+     72.9,
+     105.2,
+     114.9,
+     188.2,
+     130.0,
+     74.0,
+     86.4,
+     26.6,
+     27.5
+    ],
+    [
+     5.6,
+     2.4,
+     0.0,
+     0.0,
+     0.0,
+     71.0,
+     173.0,
+     217.6,
+     146.6,
+     109.8,
+     98.8,
+     91.3,
+     84.3,
+     132.2,
+     103.1,
+     65.2,
+     93.9,
+     112.4,
+     176.5,
+     107.2,
+     57.8,
+     69.4,
+     25.5,
+     21.3
+    ],
+    [
+     6.3,
+     1.9,
+     0.0,
+     0.0,
+     0.0,
+     130.3,
+     286.4,
+     330.4,
+     226.1,
+     158.6,
+     138.6,
+     132.8,
+     112.7,
+     159.9,
+     119.2,
+     92.2,
+     111.4,
+     141.2,
+     219.7,
+     139.1,
+     63.9,
+     63.3,
+     35.6,
+     20.1
+    ],
+    [
+     12.8,
+     1.8,
+     0.0,
+     0.0,
+     0.0,
+     169.7,
+     298.3,
+     354.9,
+     251.6,
+     184.4,
+     179.1,
+     173.6,
+     159.7,
+     198.1,
+     157.6,
+     118.7,
+     140.7,
+     180.6,
+     279.7,
+     176.4,
+     93.0,
+     80.6,
+     48.9,
+     27.1
+    ],
+    [
+     12.1,
+     1.7,
+     0.0,
+     0.0,
+     0.0,
+     190.2,
+     319.6,
+     424.3,
+     280.4,
+     208.2,
+     200.2,
+     192.3,
+     173.3,
+     222.9,
+     188.3,
+     126.0,
+     156.8,
+     201.7,
+     309.9,
+     200.6,
+     97.4,
+     84.2,
+     54.0,
+     28.0
+    ],
+    [
+     9.1,
+     1.5,
+     0.0,
+     0.0,
+     0.0,
+     238.7,
+     380.0,
+     539.3,
+     343.1,
+     249.9,
+     240.5,
+     219.2,
+     211.8,
+     245.0,
+     193.5,
+     133.0,
+     177.9,
+     219.3,
+     340.2,
+     240.9,
+     112.0,
+     98.4,
+     55.9,
+     26.7
+    ],
+    [
+     7.8,
+     1.4,
+     0.0,
+     0.0,
+     0.0,
+     258.1,
+     402.3,
+     597.4,
+     355.9,
+     270.5,
+     246.5,
+     231.1,
+     212.7,
+     254.3,
+     185.6,
+     134.9,
+     176.0,
+     211.2,
+     334.9,
+     237.2,
+     106.7,
+     96.6,
+     64.5,
+     23.3
+    ],
+    [
+     5.3,
+     1.2,
+     0.0,
+     0.0,
+     0.0,
+     255.7,
+     376.4,
+     551.4,
+     350.7,
+     268.3,
+     238.7,
+     230.5,
+     212.3,
+     236.7,
+     176.7,
+     122.8,
+     175.5,
+     186.6,
+     298.6,
+     204.2,
+     98.4,
+     88.4,
+     55.1,
+     19.7
+    ],
+    [
+     3.7,
+     0.8,
+     0.0,
+     0.0,
+     0.0,
+     275.8,
+     430.5,
+     541.7,
+     398.6,
+     263.0,
+     223.8,
+     212.3,
+     202.1,
+     292.0,
+     166.9,
+     128.7,
+     168.5,
+     188.0,
+     235.3,
+     264.7,
+     112.6,
+     238.2,
+     50.2,
+     15.3
+    ],
+    [
+     2.4,
+     0.8,
+     0.0,
+     0.0,
+     0.0,
+     251.9,
+     397.1,
+     498.2,
+     368.0,
+     240.5,
+     201.7,
+     195.0,
+     184.4,
+     263.5,
+     148.1,
+     116.6,
+     151.7,
+     167.5,
+     206.9,
+     233.5,
+     98.8,
+     215.7,
+     42.4,
+     13.6
+    ],
+    [
+     0.4,
+     0.6,
+     0.0,
+     0.0,
+     0.0,
+     57.0,
+     86.3,
+     93.9,
+     73.4,
+     63.2,
+     74.3,
+     80.1,
+     77.6,
+     120.2,
+     74.6,
+     56.6,
+     65.8,
+     66.3,
+     71.3,
+     68.5,
+     31.3,
+     54.7,
+     14.4,
+     4.0
+    ]
+   ]
+  },
+  "stops": [
+   {
+    "stop": "BUSPARK",
+    "boarding": 0.8,
+    "alighting": 0.0
+   },
+   {
+    "stop": "EV_2",
+    "boarding": 1844.8,
+    "alighting": 1082.8
+   },
+   {
+    "stop": "MH_2",
+    "boarding": 3104.9,
+    "alighting": 14.4
+   },
+   {
+    "stop": "ELY_1",
+    "boarding": 1860.3,
+    "alighting": 2617.9
+   },
+   {
+    "stop": "PL_2",
+    "boarding": 482.6,
+    "alighting": 753.6
+   },
+   {
+    "stop": "QN_1",
+    "boarding": 288.8,
+    "alighting": 573.4
+   },
+   {
+    "stop": "AXF_1",
+    "boarding": 106.6,
+    "alighting": 730.2
+   },
+   {
+    "stop": "AVX_1",
+    "boarding": 78.3,
+    "alighting": 536.5
+   },
+   {
+    "stop": "BWK_1",
+    "boarding": 245.4,
+    "alighting": 783.7
+   },
+   {
+    "stop": "BXK_1",
+    "boarding": 133.1,
+    "alighting": 291.2
+   },
+   {
+    "stop": "EVJ_1",
+    "boarding": 250.9,
+    "alighting": 292.8
+   },
+   {
+    "stop": "JB_1",
+    "boarding": 658.5,
+    "alighting": 759.5
+   },
+   {
+    "stop": "ATK_1",
+    "boarding": 453.5,
+    "alighting": 377.7
+   },
+   {
+    "stop": "BYQ_1",
+    "boarding": 979.1,
+    "alighting": 324.0
+   },
+   {
+    "stop": "SL_1",
+    "boarding": 667.8,
+    "alighting": 145.9
+   },
+   {
+    "stop": "DJJ_1",
+    "boarding": 406.0,
+    "alighting": 77.6
+   },
+   {
+    "stop": "GS_2",
+    "boarding": 788.4,
+    "alighting": 157.4
+   },
+   {
+    "stop": "CQG_1",
+    "boarding": 427.8,
+    "alighting": 312.5
+   },
+   {
+    "stop": "BOR_1",
+    "boarding": 554.3,
+    "alighting": 715.5
+   },
+   {
+    "stop": "HT_2",
+    "boarding": 1421.8,
+    "alighting": 1377.8
+   },
+   {
+    "stop": "F_5",
+    "boarding": 29.2,
+    "alighting": 386.4
+   },
+   {
+    "stop": "I_4",
+    "boarding": 3.0,
+    "alighting": 2475.3
+   }
+  ]
+ }
+}

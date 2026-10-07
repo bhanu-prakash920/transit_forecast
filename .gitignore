@@ -1,0 +1,33 @@
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Data (large; see README "Data")
+data/
+weather_cache.sqlite
+
+# Generated outputs (models, results, plots) — reproduce with scripts/run_experiments.py
+outputs/
+outputs */
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Personal documents
+paper/
